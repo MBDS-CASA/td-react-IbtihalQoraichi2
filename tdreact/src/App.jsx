@@ -27,10 +27,13 @@ function MainContent() {
     )
 }
 function Footer ( ){
+    const date = new Date();
+    const year = date.getFullYear();
     return(
+
         <main>
 
-            <h4> Tous droits réservés - Ibtihal Qoraichi </h4>
+            <h4> © {year} -Ibtihal Qoraichi Tous droits réservés </h4>
 
         </main>
     )}
