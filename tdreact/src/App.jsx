@@ -12,13 +12,17 @@ function Header ( props){
         </header>
     )
 }
-function MainContent ( ){
-    return(
+function MainContent() {
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    return (
         <main>
-            {/*<img src="https://emsi.ma/wp-content/uploads/2020/07/logo.png" alt=""  title="logo"/>*/}
-
-            <h1> Ici, nous afficherons des informations interessantes :) </h1>
-
+            <p>Bonjour, on est le {day} {month} {year} et il est {hours}:{minutes}:{seconds}</p>
         </main>
     )
 }
