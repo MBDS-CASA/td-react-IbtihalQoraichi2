@@ -2,13 +2,25 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+function Header ( props){
+    return(
+        <header>
+            <img src="https://emsi.ma/wp-content/uploads/2020/07/logo.png" alt=""  title="logo"/>
+
+            <h1> My Header is {props.name}</h1>
+            <h3>A la découverte des premières notions de React</h3>
+        </header>
+    )
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
+    return (
+        <>
+            <div>
+            <Header name="react"/>
+
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
