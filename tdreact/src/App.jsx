@@ -12,7 +12,16 @@ function Header ( props){
         </header>
     )
 }
+function MainContent ( ){
+    return(
+        <main>
+            {/*<img src="https://emsi.ma/wp-content/uploads/2020/07/logo.png" alt=""  title="logo"/>*/}
 
+            <h1> Ici, nous afficherons des informations interessantes :) </h1>
+
+        </main>
+    )
+}
 function App() {
     const [count, setCount] = useState(0)
 
@@ -27,6 +36,7 @@ function App() {
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
+                <MainContent />
       </div>
       <h1>Vite + React</h1>
       <div className="card">
