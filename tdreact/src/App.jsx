@@ -39,6 +39,7 @@ function Footer ( ){
 function getRandomItem(data) {
     const randomIndex = Math.floor(Math.random() * data.length);
     return data[randomIndex];
+
 }
 function DisplayItem({ item }) {
     return (
@@ -54,38 +55,52 @@ function DisplayItem({ item }) {
 function App() {
     const [count, setCount] = useState(0)
     const randomCourse = getRandomItem(data);
-
-
+    const menuItems = [
+        { id: 1, text: 'Notes', alertText: 'Vous avez cliqué sur Notes' },
+        { id: 2, text: 'Etudiants', alertText: 'Vous avez cliqué sur Etudiants' },
+        { id: 3, text: 'Matières', alertText: 'Vous avez cliqué sur Matières' },
+        { id: 4, text: 'A propos', alertText: 'Vous avez cliqué sur A propos' }
+    ];
+    const handleClick = (text) => {
+        alert(text);
+    };
     return (
-        <>
+        <div>
+            <nav>
+                <ul>
+                    {menuItems.map((item) => (
+                        <li key={item.id} onClick={() => handleClick(item.alertText)}>
+                            {item.text}
+                        </li>
+                    ))}
+                </ul>
+            </nav>
             <div>
-            <Header name="react"/>
-
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-                <MainContent />
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-          <DisplayItem item={randomCourse} />
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-          <Footer/>
-      </div>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+                <Header name="React" />
+                <a href="https://vite.dev/" target="_blank">
+                    <img src={viteLogo} className="logo" alt="Vite logo" />
+                </a>
+                <a href="https://react.dev/" target="_blank">
+                    <img src={reactLogo} className="logo react" alt="React logo" />
+                </a>
+            </div>
+            <MainContent />
+            <h1>Vite + React</h1>
+            <div className="card">
+                <button onClick={() => setCount((count) => count + 1)}>
+                    count is {count}
+                </button>
+                <p>
+                    Edit <code>src/App.jsx</code> and save to test HMR
+                </p>
+                <DisplayItem item={randomCourse} />
+            </div>
+            <p className="read-the-docs">
+                Click on the Vite and React logos to learn more
+            </p>
+            <Footer />
+        </div>
+    );
 }
 
 export default App

@@ -148,3 +148,33 @@ main h2 {
 #tab-content code {
   font-size: 1rem;
 }
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #1b082f;
+  color: #f1f1f1;
+  padding: 10px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  border-bottom: 1px solid #1b082f;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 20px;
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #ccc;
+}
