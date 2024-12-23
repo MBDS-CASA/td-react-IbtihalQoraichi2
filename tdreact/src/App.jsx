@@ -2,6 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import data from './assets/data.json';
+
 function Header ( props){
     return(
         <header>
@@ -30,15 +32,29 @@ function Footer ( ){
     const date = new Date();
     const year = date.getFullYear();
     return(
-
         <main>
-
             <h4> © {year} -Ibtihal Qoraichi Tous droits réservés </h4>
-
         </main>
     )}
+function getRandomItem(data) {
+    const randomIndex = Math.floor(Math.random() * data.length);
+    return data[randomIndex];
+}
+function DisplayItem({ item }) {
+    return (
+        <div>
+            <p>ID unique : {item.unique_id}</p>
+            <p>Cours : {item.course}</p>
+            <p>Élève : {item.student.firstname} {item.student.lastname} ({item.student.id})</p>
+            <p>Date : {item.date}</p>
+            <p>Note : {item.grade}</p>
+        </div>
+    );
+}
 function App() {
     const [count, setCount] = useState(0)
+    const randomCourse = getRandomItem(data);
+
 
     return (
         <>
@@ -58,6 +74,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+          <DisplayItem item={randomCourse} />
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
