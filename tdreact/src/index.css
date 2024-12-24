@@ -177,4 +177,33 @@ nav a {
 
 nav a:hover {
   color: #ccc;
+}nav ul {
+   list-style: none;
+   padding: 0;
+   display: flex;
+   gap: 1rem;
+ }
+
+nav li {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: #1b082f;
+  color: #ebe7ef;
+  transition: background-color 0.3s ease;
+}
+
+nav li.active {
+  background-color: #7925d3;
+  font-weight: bold;
+}
+
+nav li:hover {
+  background-color: #2a163b;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: #ebe7ef;
 }

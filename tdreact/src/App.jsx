@@ -1,82 +1,116 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import data from './assets/data.json';
+import React, { useState, useEffect } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 
-function Header ( props){
-    return(
+
+// Composant Header
+function Header(props) {
+    return (
         <header>
-            <img src="https://emsi.ma/wp-content/uploads/2020/07/logo.png" alt=""  title="logo"/>
-
+            <img src="https://emsi.ma/wp-content/uploads/2020/07/logo.png" alt="" title="logo" />
             <h1> My Header is {props.name}</h1>
             <h3>A la découverte des premières notions de React</h3>
         </header>
-    )
+    );
 }
+
+
 function MainContent() {
-    const date = new Date();
-    const day = date.getDate();
-    const month = date.toLocaleString('default', { month: 'long' });
-    const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
+    const [currentTime, setCurrentTime] = useState(new Date());
+
+    useEffect(() => {
+        const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const day = currentTime.getDate();
+    const month = currentTime.toLocaleString('default', { month: 'long' });
+    const year = currentTime.getFullYear();
+    const hours = currentTime.getHours();
+    const minutes = currentTime.getMinutes();
+    const seconds = currentTime.getSeconds();
+
     return (
         <main>
             <p>Bonjour, on est le {day} {month} {year} et il est {hours}:{minutes}:{seconds}</p>
         </main>
-    )
-}
-function Footer ( ){
-    const date = new Date();
-    const year = date.getFullYear();
-    return(
-        <main>
-            <h4> © {year} -Ibtihal Qoraichi Tous droits réservés </h4>
-        </main>
-    )}
-function getRandomItem(data) {
-    const randomIndex = Math.floor(Math.random() * data.length);
-    return data[randomIndex];
-
-}
-function DisplayItem({ item }) {
-    return (
-        <div>
-            <p>ID unique : {item.unique_id}</p>
-            <p>Cours : {item.course}</p>
-            <p>Élève : {item.student.firstname} {item.student.lastname} ({item.student.id})</p>
-            <p>Date : {item.date}</p>
-            <p>Note : {item.grade}</p>
-        </div>
     );
 }
+
+
+function Footer() {
+    const date = new Date();
+    const year = date.getFullYear();
+    return (
+        <footer>
+            <h4> © {year} - Ibtihal Qoraichi Tous droits réservés </h4>
+        </footer>
+    );
+}
+
+// Composants pour chaque item du menu
+function Notes() {
+    return <h2>Notes</h2>;
+}
+
+function Etudiants() {
+    return <h2>Étudiants</h2>;
+}
+
+function Matieres() {
+    return <h2>Matières</h2>;
+}
+
+function APropos() {
+    return <h2>À propos</h2>;
+}
+
+
 function App() {
-    const [count, setCount] = useState(0)
-    const randomCourse = getRandomItem(data);
+    const [activeItem, setActiveItem] = useState(null);
+
+
     const menuItems = [
-        { id: 1, text: 'Notes', alertText: 'Vous avez cliqué sur Notes' },
-        { id: 2, text: 'Etudiants', alertText: 'Vous avez cliqué sur Etudiants' },
-        { id: 3, text: 'Matières', alertText: 'Vous avez cliqué sur Matières' },
-        { id: 4, text: 'A propos', alertText: 'Vous avez cliqué sur A propos' }
+        { id: 1, text: 'Notes', component: <Notes /> },
+        { id: 2, text: 'Étudiants', component: <Etudiants /> },
+        { id: 3, text: 'Matières', component: <Matieres /> },
+        { id: 4, text: 'À propos', component: <APropos /> },
     ];
-    const handleClick = (text) => {
-        alert(text);
+
+
+    const handleMenuClick = (id) => {
+        setActiveItem(id);
     };
+
     return (
         <div>
+            {}
             <nav>
                 <ul>
                     {menuItems.map((item) => (
-                        <li key={item.id} onClick={() => handleClick(item.alertText)}>
+                        <li
+                            key={item.id}
+                            onClick={() => handleMenuClick(item.id)}
+                            className={activeItem === item.id ? 'active' : ''}
+                        >
                             {item.text}
                         </li>
                     ))}
                 </ul>
             </nav>
+
+            {/* Contenu du menu */}
             <div>
-                <Header name="React" />
+                {activeItem
+                    ? menuItems.find((item) => item.id === activeItem)?.component
+                    : <h1>Veuillez sélectionner un élément du menu.</h1>}
+            </div>
+
+            {}
+            <Header name="React" />
+            <MainContent />
+            <div>
                 <a href="https://vite.dev/" target="_blank">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
                 </a>
@@ -84,23 +118,10 @@ function App() {
                     <img src={reactLogo} className="logo react" alt="React logo" />
                 </a>
             </div>
-            <MainContent />
             <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-                <DisplayItem item={randomCourse} />
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
             <Footer />
         </div>
     );
 }
 
-export default App
+export default App;
