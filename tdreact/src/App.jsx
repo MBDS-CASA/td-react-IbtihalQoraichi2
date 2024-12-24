@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+import DataTable from "../src/component/DataTable.jsx";
 
-
-// Composant Header
 function Header(props) {
     return (
         <header>
@@ -14,7 +13,6 @@ function Header(props) {
         </header>
     );
 }
-
 
 function MainContent() {
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -66,10 +64,8 @@ function APropos() {
     return <h2>À propos</h2>;
 }
 
-
 function App() {
     const [activeItem, setActiveItem] = useState(null);
-
 
     const menuItems = [
         { id: 1, text: 'Notes', component: <Notes /> },
@@ -78,14 +74,13 @@ function App() {
         { id: 4, text: 'À propos', component: <APropos /> },
     ];
 
-
     const handleMenuClick = (id) => {
         setActiveItem(id);
     };
 
     return (
         <div>
-            {}
+            {/* Menu */}
             <nav>
                 <ul>
                     {menuItems.map((item) => (
@@ -100,25 +95,29 @@ function App() {
                 </ul>
             </nav>
 
-            {/* Contenu du menu */}
+            {/* Contenu dynamique */}
             <div>
                 {activeItem
                     ? menuItems.find((item) => item.id === activeItem)?.component
                     : <h1>Veuillez sélectionner un élément du menu.</h1>}
             </div>
 
-            {}
+            {/* Header et contenu principal */}
             <Header name="React" />
             <MainContent />
+
+            {/* Liens externes */}
             <div>
-                <a href="https://vite.dev/" target="_blank">
+                <a href="https://vite.dev/" target="_blank" rel="noopener noreferrer">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
                 </a>
-                <a href="https://react.dev/" target="_blank">
+                <a href="https://react.dev/" target="_blank" rel="noopener noreferrer">
                     <img src={reactLogo} className="logo react" alt="React logo" />
                 </a>
             </div>
             <h1>Vite + React</h1>
+            <DataTable/>
+            {/* Footer */}
             <Footer />
         </div>
     );
